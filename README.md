@@ -23,7 +23,7 @@ class Book: NSObject {
 
 Swift reflection can inspect the five properties of this class using the class method `getTypesOfProperties:inClass`. The following code that inspects properties of the class `Book` results in the commented print below:
 ```
-guard let types = getTypesOfProperties(inClass: clazz) else { return }
+guard let types = getTypesOfProperties(inClass: Book.self) else { return }
 for (name, type) in types {
   print("'\(name)' has type '\(type)'")
 }
