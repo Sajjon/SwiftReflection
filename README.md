@@ -65,3 +65,9 @@ func checkPropertiesOfBook() {
     }
 }
 ```
+
+
+# LIMITATIONS
+I have not yet been able to give this project support for when the `primitive data types` are optionals. If you have declared a property in you NSObject subclass like this: `var myOptionalInt: Int?` my solution will not work, because the method `class_copyPropertyList` can't find those properties. 
+
+Does anyone have a solution for this?
