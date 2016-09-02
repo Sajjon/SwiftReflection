@@ -73,7 +73,10 @@ fileprivate let primitiveDataTypes: Dictionary<String, Any> = [
     "S" : UInt16.self,
     "I" : UInt32.self,
     "Q" : UInt.self, //also UInt64, only true on 64 bit platforms
-    "B" : Bool.self
+    "B" : Bool.self,
+    "d" : Double.self,
+    "f" : Float.self,
+    "{" : Decimal.self
 ]
 
 extension String {
