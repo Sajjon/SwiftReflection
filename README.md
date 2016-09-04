@@ -37,7 +37,7 @@ for (name, type) in types {
 
 
 # Support for primitive data types
-It is a difference between inspecting properties which types inherits from NSObject, which then can be checked using the `==` operator and inspecting properties of primitive data type (e.g. Bool, Int). If you declare this comparison operator you can check primitive data types as well:
+It is a difference between inspecting properties which types inherits from NSObject, which then can be checked using the `==` operator and inspecting properties of value types (e.g. Bool, Int). If you declare this comparison operator you can check value types as well:
 ```
 func ==(rhs: Any, lhs: Any) -> Bool {
     let rhsType: String = "\(rhs)"
@@ -68,6 +68,6 @@ func checkPropertiesOfBook() {
 
 
 # LIMITATIONS
-I have not yet been able to give this project support for when the `primitive data types` are optionals. If you have declared a property in you NSObject subclass like this: `var myOptionalInt: Int?` my solution will not work, because the method `class_copyPropertyList` can't find those properties. 
+I have not yet been able to give this project support for when the `value types` (non class types) are optionals. If you have declared a property in you NSObject subclass like this: `var myOptionalInt: Int?` my solution will not work, because the method `class_copyPropertyList` can't find those properties. 
 
 **Does anyone have a solution for this?**
