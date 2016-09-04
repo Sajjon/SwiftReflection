@@ -3,7 +3,7 @@ Retrieve name and type of properties for a class that inherits from NSObject. Yo
 
 # Usage
 SwiftReflection relies on the Objectice-C method `class_copyPropertyList` to fetch names and types of a class that inherits from NSObject. If you create some `Book` class
-```
+```swift
 class Book: NSObject {
     let title: String
     let author: String?
@@ -22,7 +22,7 @@ class Book: NSObject {
 ```
 
 Swift reflection can inspect the five properties of this class using the class method `getTypesOfProperties:inClass`. The following code that inspects properties of the class `Book` results in the commented print below:
-```
+```swift
 guard let types = getTypesOfProperties(inClass: Book.self) else { return }
 for (name, type) in types {
   print("'\(name)' has type '\(type)'")
@@ -38,7 +38,7 @@ for (name, type) in types {
 
 # Support for primitive data types
 It is a difference between inspecting properties which types inherits from NSObject, which then can be checked using the `==` operator and inspecting properties of value types (e.g. Bool, Int). If you declare this comparison operator you can check value types as well:
-```
+```swift
 func ==(rhs: Any, lhs: Any) -> Bool {
     let rhsType: String = "\(rhs)"
     let lhsType: String = "\(lhs)"
@@ -48,7 +48,7 @@ func ==(rhs: Any, lhs: Any) -> Bool {
 ```
 
 Now you can inspect book by using:
-```
+```swift
 func checkPropertiesOfBook() {
     guard let types = getTypesOfProperties(inClass: Book.self) else { return }
 
