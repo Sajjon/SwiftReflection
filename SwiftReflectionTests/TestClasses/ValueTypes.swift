@@ -1,5 +1,5 @@
 //
-//  PrimitiveDataTypes.swift
+//  ValueTypes.swift
 //  SwiftReflection
 //
 //  Created by Cyon Alexander (Ext. Netlight) on 01/09/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PrimitiveDataTypes: NSObject {
+class ValueTypes: NSObject {
     var int8: Int8 = 1
     var int16: Int16 = 1
     var int32: Int32 = 1

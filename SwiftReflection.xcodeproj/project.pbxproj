@@ -12,7 +12,7 @@
 		65F8AC271D78824F00B44DE8 /* SwiftReflectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F8AC261D78824F00B44DE8 /* SwiftReflectionTests.swift */; };
 		65F8AC291D78824F00B44DE8 /* SwiftReflection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 653598FF1D787F6500B411D1 /* SwiftReflection.framework */; };
 		65F8AC311D78827F00B44DE8 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F8AC301D78827F00B44DE8 /* Book.swift */; };
-		65F8AC331D7882E300B44DE8 /* PrimitiveDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F8AC321D7882E300B44DE8 /* PrimitiveDataTypes.swift */; };
+		65F8AC331D7882E300B44DE8 /* ValueTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F8AC321D7882E300B44DE8 /* ValueTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +34,7 @@
 		65F8AC261D78824F00B44DE8 /* SwiftReflectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftReflectionTests.swift; sourceTree = "<group>"; };
 		65F8AC281D78824F00B44DE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65F8AC301D78827F00B44DE8 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
-		65F8AC321D7882E300B44DE8 /* PrimitiveDataTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimitiveDataTypes.swift; sourceTree = "<group>"; };
+		65F8AC321D7882E300B44DE8 /* ValueTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				65F8AC301D78827F00B44DE8 /* Book.swift */,
-				65F8AC321D7882E300B44DE8 /* PrimitiveDataTypes.swift */,
+				65F8AC321D7882E300B44DE8 /* ValueTypes.swift */,
 			);
 			path = TestClasses;
 			sourceTree = "<group>";
@@ -222,7 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65F8AC331D7882E300B44DE8 /* PrimitiveDataTypes.swift in Sources */,
+				65F8AC331D7882E300B44DE8 /* ValueTypes.swift in Sources */,
 				65F8AC311D78827F00B44DE8 /* Book.swift in Sources */,
 				65F8AC271D78824F00B44DE8 /* SwiftReflectionTests.swift in Sources */,
 			);
@@ -427,6 +427,7 @@
 				65F8AC2D1D78824F00B44DE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

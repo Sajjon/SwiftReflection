@@ -16,21 +16,34 @@ import ObjectiveC.runtime
  This tool can find the name and type of properties of type NSObject, e.g. NSString (or just "String" with Swift 3 syntax), NSDate (or just "NSDate" with Swift 3 syntax), NSNumber etc.
  It also works with optionals and implicit optionals for said types, e.g. String?, String!, Date!, Date? etc...
 
- This tool can also find name and type of "primitive data types" such as Bool, Int, Int32, _HOWEVER_ it does not work if said primitive have optional type, e.g. Int? <--- DOES NOT WORK
+ This tool can also find name and type of "value type" such as Bool, Int, Int32, _HOWEVER_ it does not work if said value type is an optional, e.g. Int? <--- DOES NOT WORK
  */
 
 
-public func getTypesOfProperties(in clazz: NSObject.Type) -> Dictionary<String, Any>? {
+public func getTypesOfProperties(in clazz: NSObject.Type, includeSuperclass: Bool = false) -> Dictionary<String, Any>? {
+    let types: Dictionary<String, Any> = [:]
+    return getTypesOfProperties(in: clazz, types: types, includeSuperclass: includeSuperclass)
+}
+
+public func getTypesOfProperties(in clazz: NSObject.Type, types: Dictionary<String, Any>, includeSuperclass: Bool) -> Dictionary<String, Any>? {
     var count = UInt32()
     guard let properties = class_copyPropertyList(clazz, &count) else { return nil }
-    var types: Dictionary<String, Any> = [:]
+    var types = types
     for i in 0..<Int(count) {
-        guard let property: objc_property_t = properties[i], let name = getNameOf(property: property) else { continue }
+        guard
+            let property: objc_property_t = properties[i],
+            let name = getNameOf(property: property)
+            else { continue }
         let type = getTypeOf(property: property)
         types[name] = type
     }
     free(properties)
-    return types
+
+    if includeSuperclass, let superclazz = clazz.superclass() as? NSObject.Type, superclazz != NSObject.self {
+        return getTypesOfProperties(in: superclazz, types: types, includeSuperclass: true)
+    } else {
+        return types
+    }
 }
 
 public func getTypesOfProperties(ofObject object: NSObject) -> Dictionary<String, Any>? {
@@ -61,8 +74,8 @@ public func isProperty(named propertyName: String, ofType targetType: Any, in cl
 }
 
 fileprivate func ==(rhs: Any, lhs: Any) -> Bool {
-    var rhsType: String = "\(rhs)".withoutOptional
-    var lhsType: String = "\(lhs)".withoutOptional
+    let rhsType: String = "\(rhs)".withoutOptional
+    let lhsType: String = "\(lhs)".withoutOptional
     let same = rhsType == lhsType
     return same
 }
@@ -86,23 +99,26 @@ fileprivate func getTypeOf(property: objc_property_t) -> Any {
     guard let attributesAsNSString: NSString = NSString(utf8String: property_getAttributes(property)) else { return Any.self }
     let attributes = attributesAsNSString as String
     let slices = attributes.components(separatedBy: "\"")
-    guard slices.count > 1 else { return getPrimitiveDataType(withAttributes: attributes) }
+    guard slices.count > 1 else { return valueType(withAttributes: attributes) }
     let objectClassName = slices[1]
     let objectClass = NSClassFromString(objectClassName) as! NSObject.Type
     return objectClass
 }
 
-fileprivate func getPrimitiveDataType(withAttributes attributes: String) -> Any {
-    guard let letter = attributes.substring(from: 1, to: 2), let type = primitiveDataTypes[letter] else { return Any.self }
+
+fileprivate func valueType(withAttributes attributes: String) -> Any {
+    guard let letter = attributes.substring(from: 1, to: 2), let type = valueTypesMap[letter] else { return Any.self }
     return type
 }
 
 fileprivate func getNameOf(property: objc_property_t) -> String? {
-    guard let name: NSString = NSString(utf8String: property_getName(property)) else { return nil }
+    guard
+        let name: NSString = NSString(utf8String: property_getName(property))
+    else { return nil }
     return name as String
 }
 
-fileprivate let primitiveDataTypes: Dictionary<String, Any> = [
+fileprivate let valueTypesMap: Dictionary<String, Any> = [
     "c" : Int8.self,
     "s" : Int16.self,
     "i" : Int32.self,
