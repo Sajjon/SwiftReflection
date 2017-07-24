@@ -46,7 +46,7 @@ class SwiftReflectionTests: XCTestCase {
     }
 
     func testBookClass() {
-        guard let types = SwiftReflection.getTypesOfProperties(inClass: Book.self) else {
+        guard let types = SwiftReflection.getTypesOfProperties(in: Book.self) else {
             assert(false, "Should be able to get types")
             return
         }
